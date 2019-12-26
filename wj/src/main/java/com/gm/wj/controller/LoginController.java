@@ -30,22 +30,49 @@ public class LoginController {
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, requestUser.getPassword());
         usernamePasswordToken.setRememberMe(true);
         try {
+            User user = userService.findByUserName(username);
+            if (!user.isEnabled()) {
+                String message = "该用户已被禁用";
+                return ResultFactory.buildFailResult(message);
+            }
             subject.login(usernamePasswordToken);
             // 生成随机 token 并存储在 session 中
-            User user = userService.getByUserName(username);
             return ResultFactory.buildSuccessResult(usernamePasswordToken);
+
         } catch (AuthenticationException e) {
-            String message = "账号密码错误";
+            String message = "账号或密码错误";
             return ResultFactory.buildFailResult(message);
         }
     }
 
-    @PostMapping("api/register")
+    @GetMapping("/login")
+    public Result login() {
+        String message = "非法登录";
+        return ResultFactory.buildSuccessResult(message);
+    }
+
+    @PostMapping("/api/register")
     public Result register(@RequestBody User user) {
         String username = user.getUsername();
+        String name = user.getName();
+        String phone = user.getPhone();
+        String email = user.getEmail();
         String password = user.getPassword();
+
         username = HtmlUtils.htmlEscape(username);
         user.setUsername(username);
+        name = HtmlUtils.htmlEscape(name);
+        user.setName(name);
+        phone = HtmlUtils.htmlEscape(phone);
+        user.setPhone(phone);
+        email = HtmlUtils.htmlEscape(email);
+        user.setEmail(email);
+        user.setEnabled(true);
+
+        if (username.equals("") || password.equals("")) {
+            String message = "用户名或密码为空，注册失败";
+            return ResultFactory.buildFailResult(message);
+        }
 
         boolean exist = userService.isExist(username);
 
@@ -61,12 +88,12 @@ public class LoginController {
 
         user.setSalt(salt);
         user.setPassword(encodedPassword);
-        userService.add(user);
+        userService.addOrUpdate(user);
 
         return ResultFactory.buildSuccessResult(user);
     }
 
-    @GetMapping("api/logout")
+    @GetMapping("/api/logout")
     public Result logout() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
@@ -75,7 +102,7 @@ public class LoginController {
     }
 
     @GetMapping(value = "api/authentication")
-    public String authentication(){
+    public String authentication() {
         return "身份认证成功";
     }
 }

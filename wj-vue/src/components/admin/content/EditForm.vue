@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <i class="el-icon-circle-plus-outline"  @click="dialogFormVisible = true"></i>
+  <div style="text-align: left">
+    <el-button class="add-button" type="success" @click="dialogFormVisible = true">添加图书</el-button>
     <el-dialog
       title="添加/修改图书"
       :visible.sync="dialogFormVisible"
@@ -88,7 +88,7 @@
       },
       onSubmit () {
         this.$axios
-          .post('/books', {
+          .post('/admin/content/books', {
             id: this.form.id,
             cover: this.form.cover,
             title: this.form.title,
@@ -112,10 +112,7 @@
 </script>
 
 <style scoped>
-  .el-icon-circle-plus-outline {
-    margin: 50px 0 0 20px;
-    font-size: 100px;
-    float: left;
-    cursor: pointer;
+  .add-button {
+    margin: 18px 0 0 10px;
   }
 </style>

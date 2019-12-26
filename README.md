@@ -1,12 +1,16 @@
-白卷是一个前后端分离的 Java Web 项目，采用 SpringBoot + Vue.js 开发。  
+![wjlogo.png](https://i.loli.net/2019/12/15/sYnuTIrDUwAfGgo.png)
 
-# 前言 
+---
 
-这是一个简单的小项目，旨在熟悉 Java Web 项目开发流程，我会尽量采用目前较为流行的技术，并把开发的经验分享给大家。
+![lisense](https://img.shields.io/github/license/Antabot/White-Jotter)
+![release](https://img.shields.io/github/v/release/Antabot/White-Jotter)
 
-除了用作入门练习，我还希望该项目可以作为一些通用 Web 项目的脚手架，帮助大家简化搭建网站的流程。之所以叫白卷，是因为它从 0 开始，会随着时间的推移逐渐完善。
 
-# 一、整体效果
+这是一个简单的前后端分离项目，主要采用 Vue.js + SpringBoot 技术栈开发。
+
+除了用作入门练习，我还希望该项目可以作为一些常见 Web 项目的脚手架，帮助大家简化搭建网站的流程。之所以叫白卷，是因为它从 0 开始，会随着时间的推移逐渐完善。
+
+# 整体效果
 
 ## 1.首页
 
@@ -16,19 +20,21 @@
 
 ## 2.图书馆
 
-作为核心功能页面之一，提供图书信息展示功能
+提供图书信息展示功能
 
-![图书馆](https://i.loli.net/2019/04/13/5cb1e3d5acf1d.png)
+![图书馆](https://i.loli.net/2019/12/03/AGLbIupct68ThBD.png)
 
 ## 3.登录页面
 
 ![登录页面](https://i.loli.net/2019/04/14/5cb2fd5b78ae7.png)
 
-## 4.笔记本
+## 4.后台管理
 
-该页面尚未成型
+包含 dashboard、内容管理、用户及权限管理等
 
-# 二、技术栈
+![后台](https://img-blog.csdnimg.cn/20191202200516251.png)
+
+# 技术栈
 
 ## 1.前端技术栈
 
@@ -38,14 +44,14 @@
 
 ## 2.后端技术栈
 
-1.SpringBoot  
-2.Java Persistence API  
+1.Spring Boot  
+2.Spring Data + JPA 
 3.MySQL  
 4.Shiro
   
 在开发过程中还会不断用到一些细碎的技术，有必要的我会增添上去
 
-# 三、部署方法
+# 部署方法
 
 1.clone 项目到本地
 
@@ -69,6 +75,7 @@ npm install
 
 # 在 localhost:8080 启动项目
 npm run dev
+
 ```  
 
 由于在 `wj-vue` 项目中已经配置了端口转发，将数据转发到SpringBoot上，因此项目启动之后，在浏览器中输入 `http://localhost:8080` 就可以访问我们的前端项目了，所有的请求通过端口转发将数据传到 SpringBoot 中（注意此时不要关闭 SpringBoot 项目）。
@@ -113,10 +120,16 @@ npm run build
 
 14.[用户认证方案与完善的访问拦截](https://learner.blog.csdn.net/article/details/102788866)
 
+15.[动态加载后台菜单](https://learner.blog.csdn.net/article/details/103114893)
+
+16.[功能级访问控制的实现](https://learner.blog.csdn.net/article/details/103250775)
+
 (持续更新中)
 
 # 近期更新
 
+12-01 实现功能级权限控制  
+11-30 利用 vue-elment-admin 项目完善后台界面设计  
 11-17 重构项目，完成搭建后台基础界面，实现按角色加载菜单，取消前台访问限制  
 04-27 使用前端拦截器，数据库迁移至 mysql 8.0.15，后台管理页面初始化  
 04-13 完成图片的上传功能  
@@ -126,32 +139,3 @@ npm run build
 04-05 完成图书修改功能  
 04-04 完成图书删除功能  
 04-03 完成图书新增功能
-
-# 功能实现情况
-
-### 1.图书展示
-
-功能描述 | 实现情况
----|---
-基本信息 | 完成
-
-### 2.后台管理
-
-功能描述 | 实现情况
----|---
-菜单控制 | 基本完成
-内容管理 | 开发中
-功能控制 | 开发中
-数据控制 | 未完成
-
-### 3.信息查询
-
-功能描述 | 实现情况
----|---
-图书检索 | 基本完成
-
-### 4.其它功能
-
-功能描述 | 实现情况
----|---
-阅读标注 | 未完成

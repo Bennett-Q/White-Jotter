@@ -4,6 +4,7 @@
       :default-active="currentPath"
       router
       mode="horizontal"
+      @select="handleSelect"
       background-color="white"
       text-color="#222"
       active-text-color="red"
@@ -34,7 +35,7 @@
           {name: '/index', navItem: '首页'},
           {name: '/jotter', navItem: '笔记本'},
           {name: '/library', navItem: '图书馆'},
-          {name: '/admin', navItem: '个人中心'}
+          {name: '/admin/dashboard', navItem: '管理中心'}
         ],
         keywords: ''
       }
@@ -48,6 +49,11 @@
       }
     },
     methods: {
+      handleSelect (key, keyPath) {
+        console.log(key)
+        console.log('...')
+        console.log(keyPath)
+      }
       // logout () {
       //   var _this = this
       //   this.$axios.get('/logout').then(resp => {
